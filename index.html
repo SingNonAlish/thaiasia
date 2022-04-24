@@ -15,6 +15,7 @@
     <p id="displayName"><b>DisplayName: </b></p>
     <p id="statusMessage"><b>StatusMessage: </b></p>
     <p id="getDecodedidtoken"><b>Email : </b></p>
+    <p id="liffBrowser"><b>Liff Browser : </b></p>
     <button id="btnsendMessage" onclick="sendMessage()">Send Message</button>
     <button id="btnLogOut" onclick="logOut()">Log Out</button>
 
@@ -24,7 +25,7 @@
             await liff.init({ liffId: "1657081118-4pxq0AYK" })
             if (liff.isLoggedIn()) {
                 getUserProfile();
-                if(liff.isInClient() == true){
+                if (liff.isInClient() == true) {
                     document.getElementById("btnsendMessage").hidden = '';
                 }
             } else {
@@ -40,6 +41,7 @@
             document.getElementById("displayName").append(profile.displayName);
             document.getElementById("statusMessage").append(profile.statusMessage);
             document.getElementById("getDecodedidtoken").append(liff.getDecodedIDToken().email);
+            document.getElementById("liffBrowser").append(liff.isInClient());
         }
 
         function logOut() {
@@ -50,20 +52,23 @@
 
         function sendMessage() {
             liff.sendMessages([
-                    {
-                        type: "text",
-                        text: "Hello, World!",
-                    },
-                ])
+                {
+                    type: "text",
+                    text: "Hello, World!",
+                },
+            ])
                 .then(() => {
                     console.log("message sent");
                 })
                 .catch((err) => {
                     console.log("error", err);
                 });
-            liff.closeWindow();
+            delay(function () {
+                liff.closeWindow();
+            }, 2000); // end delay
+            
         }
-        
+
     </script>
 </body>
 
