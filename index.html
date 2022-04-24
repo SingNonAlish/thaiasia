@@ -10,6 +10,8 @@
 
 <body>
     <h2>ให้ นศ. พิมพ์รหัสประจำตัว 7 หลัก</h2>
+    <p id="uID"><b>userId:</b></p>
+    <img id="imgUrl" src="" style="width: 200px; height: 200px;">
     <p id="displayName"><b>displayName:</b></p>
     <p id="statusMessage"><b>statusMessage:</b></p>
     <button id="btnLogOut" onclick="logOut">Log Out</button>
@@ -28,13 +30,14 @@
 
         async function getUserProfile() {
             const profile = await liff.getProfile();
-//             document.getElementById("pictureUrl").src = profile.pictureUrl;
+            document.getElementById("displayName").append(profile.userId);
+            document.getElementById("imgUrl").src = profile.pictureUrl;
             document.getElementById("displayName").append(profile.displayName);
             document.getElementById("statusMessage").append(profile.statusMessage);
         }
 
         function logOut() {
-            liff.logOut();
+            liff.logout();
             window.localtion.reload();
         }
     </script>
