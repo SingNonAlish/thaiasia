@@ -18,12 +18,15 @@
     <button id="btnsendMessage" onclick="sendMessage()">Send Message</button>
     <button id="btnLogOut" onclick="logOut()">Log Out</button>
 
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.3.0/sdk.js"></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
         async function main() {
             await liff.init({ liffId: "1657081118-4pxq0AYK" })
             if (liff.isLoggedIn()) {
                 getUserProfile();
+                if(liff.isInClient() == true){
+                    document.getElementById("btnsendMessage").hidden = '';
+                }
             } else {
                 liff.login();
             }
@@ -46,8 +49,7 @@
         }
 
         function sendMessage() {
-            liff
-                .sendMessages([
+            liff.sendMessages([
                     {
                         type: "text",
                         text: "Hello, World!",
@@ -59,7 +61,9 @@
                 .catch((err) => {
                     console.log("error", err);
                 });
+            liff.closeWindow();
         }
+        
     </script>
 </body>
 
