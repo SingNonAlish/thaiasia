@@ -26,6 +26,7 @@
             if (liff.isLoggedIn()) {
                 getUserProfile();
                 if (liff.isInClient() == false) {
+                    console.log("hide");
                     document.getElementById("btnsendMessage").hidden = "";
                 }
             } else {
@@ -63,7 +64,7 @@
                 .catch((err) => {
                     console.log("error", err);
                 });
-            const myTimeout = setTimeout(closewindow, 3000);
+            const myTimeout = setTimeout(closewindow, 1000);
         }  
         
         function closewindow(){
