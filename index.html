@@ -37,8 +37,11 @@
         }
 
         function logOut() {
-            liff.logout();
+            if (liff.isLoggedIn()) {
+                liff.logout();
+            }
         }
     </script>
 </body>
+
 </html>
