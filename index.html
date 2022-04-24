@@ -25,7 +25,7 @@
             await liff.init({ liffId: "1657081118-4pxq0AYK" })
             if (liff.isLoggedIn()) {
                 getUserProfile();
-                if (liff.isInClient() == true) {
+                if (liff.isInClient() == false) {
                     document.getElementById("btnsendMessage").hidden = '';
                 }
             } else {
