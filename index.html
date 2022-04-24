@@ -10,10 +10,12 @@
 
 <body>
     <h2>ให้ นศ. พิมพ์รหัสประจำตัว 7 หลัก</h2>
-    <p id="uID"><b>userId:</b></p>
+    <p id="uID"><b>UserId: </b></p>
     <img id="imgUrl" src="" style="width: 200px; height: 200px;">
-    <p id="displayName"><b>displayName:</b></p>
-    <p id="statusMessage"><b>statusMessage:</b></p>
+    <p id="displayName"><b>DisplayName: </b></p>
+    <p id="statusMessage"><b>StatusMessage: </b></p>
+    <p id="getDecodedidtoken"><b>Email : </b></p>
+    <button id="btnsendMessage" onclick="sendMessage()">Send Message</button>
     <button id="btnLogOut" onclick="logOut()">Log Out</button>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.3.0/sdk.js"></script>
@@ -34,13 +36,29 @@
             document.getElementById("imgUrl").src = profile.pictureUrl;
             document.getElementById("displayName").append(profile.displayName);
             document.getElementById("statusMessage").append(profile.statusMessage);
+            document.getElementById("getDecodedidtoken").append(profile.getDecodedIDToken().email);
         }
 
         function logOut() {
             if (liff.isLoggedIn()) {
                 liff.logout();
-                console.log('logout');
             }
+        }
+
+        function sendMessage() {
+            liff
+                .sendMessages([
+                    {
+                        type: "text",
+                        text: "Hello, World!",
+                    },
+                ])
+                .then(() => {
+                    console.log("message sent");
+                })
+                .catch((err) => {
+                    console.log("error", err);
+                });
         }
     </script>
 </body>
