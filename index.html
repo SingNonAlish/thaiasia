@@ -26,14 +26,23 @@
             await liff.init({ liffId: "1657081118-4pxq0AYK" })
             if(!liff.inInClient()){
                 if (liff.isLoggedIn()) {
+                    if(!liff.inInClient()){
                     btnLogIn.style.display = "none";
                     btnLogOut.style.display = "block";
-                }else{
+                    }else{
                     btnLogIn.style.display = "block";
-                    btnLogOut.style.display = "none";               
-                }
-            } else {
+                    btnLogOut.style.display = "none";  
+                    }
+//                     btnLogIn.style.display = "none";
+//                     btnLogOut.style.display = "block";
+//                 }else{
+//                     btnLogIn.style.display = "block";
+//                     btnLogOut.style.display = "none";               
+//                 }
                 getUserProfile();
+            } else {
+                liff.isLoggedIn();
+//                 getUserProfile();
             }
         }
         main();
