@@ -17,32 +17,20 @@
     <p id="getDecodedidtoken"><b>Email : </b></p>
     <p id="liffBrowser"><b>Liff Browser : </b></p>
     <button id="btnsendMessage" onclick="sendMessage()">Send Message</button>
-    <button id="btnLogIn" onclick="logOut()">Log Out</button>
     <button id="btnLogOut" onclick="logOut()">Log Out</button>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
         async function main() {
             await liff.init({ liffId: "1657081118-4pxq0AYK" })
-            if(!liff.inInClient()){
-                if (liff.isLoggedIn()) {
-                    if(!liff.inInClient()){
-                    btnLogIn.style.display = "none";
-                    btnLogOut.style.display = "block";
-                    }else{
-                    btnLogIn.style.display = "block";
-                    btnLogOut.style.display = "none";  
-                    }
-//                     btnLogIn.style.display = "none";
-//                     btnLogOut.style.display = "block";
-//                 }else{
-//                     btnLogIn.style.display = "block";
-//                     btnLogOut.style.display = "none";               
-//                 }
+            if (liff.isLoggedIn()) {
                 getUserProfile();
+                if (liff.isInClient() == false) {
+                    console.log("hide");
+                    document.getElementById("btnsendMessage").style.display = "none";
+                }
             } else {
-                liff.isLoggedIn();
-//                 getUserProfile();
+                liff.login();
             }
         }
         main();
@@ -63,19 +51,20 @@
             }
         }
 
-        async function sendMessage() {       
-             if (liff.getContext().type !== "none" && liff.getContext().type !== "external") {
-            await liff.sendMessages([
+        function sendMessage() {            
+            liff.sendMessages([
                 {
                     type: "text",
-                    text: "Liff App",
-                }
-                ]);
-                liff.closeWindow();
-//                 alert("Message sendt");
-//              }  
-//             const myTimeout = setTimeout(closewindow, 1000);
-             }
+                    text: "Hello, World!",
+                },
+            ])
+                .then(() => {
+                    console.log("message sent");
+                })
+                .catch((err) => {
+                    console.log("error", err);
+                });
+            const myTimeout = setTimeout(closewindow, 1000);
         }  
         
         function closewindow(){
